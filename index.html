@@ -7,8 +7,9 @@
     <body>
         <main>    
             <div class="top">
-                <div id="crypto">
-                    <div id="crypto-top"></div>
+                <div id="ai-news-con">
+                    <h3>Latest Ai articles:</h3>
+                    <div id="ai-news"></div>
                 </div>
                 <div id="weather"></div>
             </div>
@@ -18,7 +19,23 @@
                 <h2 id="quote"></h2>
                 <p id="quote-author"></p>
             </div>
-            <p id="img-author"></p>
+            <div class="bottom">
+                <p id="img-author"></p>
+                <h3 id="todo-toggle">TODO</h3>
+            </div>
+            <div class="todo-list" id="todo-list">
+                <input
+                class="todo-input"
+                id="todo-input"
+                type="text"
+                placeholder="Add a new task..."/>
+                <ul class="todo">
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                </ul>
+                <!-- Here will be a to do list -->
+            </div>
         </main>
         <script src="index.js" type="module"></script>
     </body>

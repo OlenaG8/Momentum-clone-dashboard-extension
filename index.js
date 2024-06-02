@@ -1,35 +1,13 @@
-const unsplashAppId = '615723'
-const unsplashAccessKey = `pjf87PsCwmI7wLmBna_Zai82dGlCnrHSJWviZyXpqN4`
 
 try {
-    const res = await fetch(`https://api.unsplash.com/photos/?${unsplashAppId}=${unsplashAccessKey}/random?orientation=landscape&query=nature`)
+    const res = await fetch(`https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature`)
     const data = await res.json()
     document.body.style.backgroundImage = `url(${data.urls.regular})`
-    document.getElementById("img-author").textContent = `Photo by ${data.user.name} on Unsplash`
+    document.getElementById("img-author").innerHTML = `<a href="${data.user.portfolio_url}">Photo by <u>${data.user.name}</u> on <u>Unsplash</u></a>`
 } catch (err) {
     document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1560008511-11c63416e52d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTEwMjl8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI4NDIxMTc&ixlib=rb-1.2.1&q=80&w=1080
 )`
-    document.getElementById("img-author").textContent = `By: Dodi Achmad`
-}
-
-
-try {
-    const res = await fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
-    if (!res.ok) {
-        throw Error("Something went wrong")
-    }
-    const data = await res.json()
-    document.getElementById("crypto-top").innerHTML = `
-        <img src=${data.image.small} />
-        <span>${data.name}</span>
-    `
-    document.getElementById("crypto").innerHTML += `
-        <p>🎯: $${data.market_data.current_price.usd}</p>
-        <p>👆: $${data.market_data.high_24h.usd}</p>
-        <p>👇: $${data.market_data.low_24h.usd}</p>
-    `
-} catch (err) {
-    console.log(err)
+    document.getElementById("img-author").innerHTML = `<a href="https://unsplash.com/@dodiachmad">Photo by <u>Dodi Achmad</u> on <u>Unsplash</u></a>`
 }
 
 try {
@@ -40,6 +18,8 @@ try {
 
 } catch (err) {
     console.log(err)
+    document.getElementById("quote").textContent = 'You can do hard things!'
+    document.getElementById("quote-author").textContent = 'Glennon Doyle'
 }
 
 function getCurrentTime() {
@@ -65,4 +45,48 @@ navigator.geolocation.getCurrentPosition(async position => {
     } catch (err) {
         console.error(err)
     }
+})
+
+const url = 'https://ai-news-api.p.rapidapi.com/news';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'b170c8ab49msh969fb2179527b1bp114307jsne5054f81d909',
+		'X-RapidAPI-Host': 'ai-news-api.p.rapidapi.com'
+	}
+}
+
+try {
+	const response = await fetch(url, options)
+	const data = await response.json()
+
+    let currentIndex = 0
+
+    function getLatestAiNews() {
+        const newsItem = data[currentIndex]
+        document.getElementById("ai-news").innerHTML = `
+            <a href="${newsItem.url}">${newsItem.title}</a>
+            <p>Source: ${newsItem.source}</p>
+        `
+        currentIndex = (currentIndex + 1) % data.length
+    }
+
+    getLatestAiNews()
+    setInterval(getLatestAiNews, 10000)
+
+} catch (error) {
+	console.error(error)
+}
+
+const todoToggle = document.getElementById("todo-toggle")
+
+todoToggle.addEventListener("click", function() {
+    const todoListCon = document.getElementById("todo-list")
+
+    if (todoListCon.style.display === "none") {
+        todoListCon.style.display = "flex";
+    } else {
+        todoListCon.style.display = "none";
+    }
+
 })
