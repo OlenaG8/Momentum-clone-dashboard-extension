@@ -10,14 +10,22 @@ try {
     document.getElementById("img-author").innerHTML = `<a href="https://unsplash.com/@dodiachmad">Photo by <u>Dodi Achmad</u> on <u>Unsplash</u></a>`
 }
 
-try {
-    const res = await fetch("https://www.stands4.com/services/v2/quotes.php?uid=12580&tokenid=cwjel23pucQszIp0&searchtype=RANDOM&format=json")
-    const data = await res.json()
-    document.getElementById("quote").textContent = data.result.quote
-    document.getElementById("quote-author").textContent = data.result.author
+const url = 'https://quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com/quote?token=ipworld.info';
+const options = {
+	method: 'GET',
+	headers: {
+		'x-rapidapi-key': 'b170c8ab49msh969fb2179527b1bp114307jsne5054f81d909',
+		'x-rapidapi-host': 'quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com'
+	}
+};
 
-} catch (err) {
-    console.log(err)
+try {
+	const response = await fetch(url, options);
+	const data = await response.json();
+    document.getElementById("quote").textContent = data.text
+    document.getElementById("quote-author").textContent = data.author
+} catch (error) {
+	console.error(error);
     document.getElementById("quote").textContent = 'You can do hard things!'
     document.getElementById("quote-author").textContent = 'Glennon Doyle'
 }
@@ -47,8 +55,8 @@ navigator.geolocation.getCurrentPosition(async position => {
     }
 })
 
-const url = 'https://ai-news-api.p.rapidapi.com/news';
-const options = {
+const AiNewsUrl = 'https://ai-news-api.p.rapidapi.com/news';
+const AiNewsOptions = {
 	method: 'GET',
 	headers: {
 		'X-RapidAPI-Key': 'b170c8ab49msh969fb2179527b1bp114307jsne5054f81d909',
@@ -57,7 +65,7 @@ const options = {
 }
 
 try {
-	const response = await fetch(url, options)
+	const response = await fetch(AiNewsUrl, AiNewsOptions)
 	const data = await response.json()
 
     let currentIndex = 0
@@ -88,5 +96,35 @@ todoToggle.addEventListener("click", function() {
     } else {
         todoListCon.style.display = "none";
     }
-
 })
+
+let todoList = []
+
+const todoInput = document.getElementById('todo-input')
+const todoText = todoInput.value.trim();
+
+todoInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault()
+        renderTodoList()
+    }
+})
+
+function getTodoListHtml(todoItem) {
+    return `
+    <li  class="checkbox-wrapper-13">
+        <input type="checkbox">${todoItem}
+    </li>
+    `
+}
+
+function renderTodoList() {
+    if (todoText !== '') {
+        todoList.push(todoText)
+        todoInput.value = '';
+    }
+}
+
+function updateLocStorage() {
+    localStorage.setItem("todolist", JSON.stringify(todoList))
+}
