@@ -89,7 +89,7 @@ try {
 const todoToggle = document.getElementById("todo-toggle")
 
 todoToggle.addEventListener("click", function() {
-    const todoListCon = document.getElementById("todo-list")
+    const todoListCon = document.getElementById("todo-list-con")
 
     if (todoListCon.style.display === "none") {
         todoListCon.style.display = "flex";
@@ -101,13 +101,21 @@ todoToggle.addEventListener("click", function() {
 let todoList = []
 
 const todoInput = document.getElementById('todo-input')
-const todoText = todoInput.value.trim();
+const todoListCon = document.getElementById('todo-list')
+
+const clearTodoList = document.getElementById('clear-todo-list')
 
 todoInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
         e.preventDefault()
-        renderTodoList()
+        addToTodoList()
     }
+})
+
+clearTodoList.addEventListener("click", () => {
+    todoList = []
+    updateLocStorage()
+    todoListCon.textContent = ''
 })
 
 function getTodoListHtml(todoItem) {
@@ -117,14 +125,32 @@ function getTodoListHtml(todoItem) {
     </li>
     `
 }
-
 function renderTodoList() {
-    if (todoText !== '') {
-        todoList.push(todoText)
-        todoInput.value = '';
+    let html = todoList.map(getTodoListHtml).join('')
+    todoListCon.innerHTML = html
+}
+
+function addToTodoList() {
+    if (todoInput.value.length != 0) {
+        todoList.push(todoInput.value)
+        todoInput.value = ''
+        renderTodoList()
+        updateLocStorage()
     }
 }
 
 function updateLocStorage() {
     localStorage.setItem("todolist", JSON.stringify(todoList))
 }
+
+function checkForStoredTodoList() {
+    const storedTodoList = localStorage.getItem("todolist")
+    if (storedTodoList) {
+        todoList = JSON.parse(storedTodoList) || []
+    }
+    renderTodoList()
+}
+
+checkForStoredTodoList()
+
+
