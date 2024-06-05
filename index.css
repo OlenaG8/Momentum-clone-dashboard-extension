@@ -29,6 +29,8 @@ h1.time {
     text-decoration-thickness: 8px;
 }
 
+/*--- layout ---*/
+
 main {
     padding: 15px;
     height: 100vh;
@@ -104,7 +106,8 @@ div.todo-list-con {
     position: absolute;
     right: 1em;
     bottom: 8vh;
-    height: 30vh;
+    min-height: 250px;
+    height: auto;
     width: 25vw;
     border-radius: 6px;
     background-color: #fff;
@@ -130,12 +133,12 @@ div.todo-list-con input:focus {
 
 ul.todo-list {
     list-style: none;
-    height: 30vh;
     width: 25vw;
     margin: 0;
     padding: 0;
     color:#242424;
     text-shadow: none;
+    margin-bottom: 40px;
 }
 
 ul.todo-list li {
