@@ -1,4 +1,4 @@
-#Personal Dashboard Extension
+# Personal Dashboard Extension
 
 A project created as a part of Scrimba Frontend Development Course.
 <p>Deployed website: https://olenag8.github.io/movie-watchlist/ </p>
