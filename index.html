@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="index.css">
@@ -6,23 +6,21 @@
     </head>
     <body>
         <main>    
-            <div class="top">
-                <div id="ai-news-con">
-                    <h3>Latest Ai articles:</h3>
-                    <div id="ai-news"></div>
-                </div>
-                <div id="weather"></div>
+            <div class="ai-news-con" id="ai-news-con">
+                <h3>Latest Ai articles:</h3>
+                <div id="ai-news"></div>
             </div>
+            <div class="weather" id="weather"></div>
             
             <div class="center">
                 <h1 id="time" class="time"></h1>
                 <h2 id="quote"></h2>
                 <p id="quote-author"></p>
             </div>
-            <div class="bottom">
-                <p id="img-author"></p>
-                <h3 id="todo-toggle">TODO</h3>
-            </div>
+
+            <p id="img-author"></p>
+            <h3 id="todo-toggle">TODO</h3>
+
             <div class="todo-list-con" id="todo-list-con">
                 <button class="clear-todo-list" id="clear-todo-list">Clear all</button>
                 <ul class="todo-list" id="todo-list">
@@ -35,6 +33,7 @@
                 placeholder="Add a new task..."/>
             </div>
         </main>
+
         <script src="index.js" type="module"></script>
     </body>
 </html>

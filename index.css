@@ -7,13 +7,16 @@ body {
     background: no-repeat center center fixed; 
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
 }
 
 /*--- typography ---*/
 
-div.top,
-div.bottom,
-div.center {
+div.ai-news-con,
+div.weather,
+div.center,
+p#img-author,
+h3#todo-toggle {
     color: #fff;
     text-shadow: 0px 0px 20px #242424;
 }
@@ -21,12 +24,38 @@ a {
     color: #fff;
     text-decoration: none;
 }
+div#ai-news a {
+    font-size: 1.1rem;
+    text-decoration: underline ;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+div#ai-news p {
+    font-size: 0.9rem;
+    text-transform: capitalize;
+}
 
 h1.time {
-    text-align: center;
     font-size: 5rem;
     text-decoration-line: underline;
     text-decoration-thickness: 8px;
+}
+
+p.weather-temp {
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+p.weather-city,
+p#author { font-size: 1.13rem; }
+
+button.clear-todo-list {
+    font-family: inherit;
+    font-size: 0.8rem;
+    letter-spacing: 1.3px;
+    color:#535353;
+    text-decoration: underline;
 }
 
 /*--- layout ---*/
@@ -34,71 +63,48 @@ h1.time {
 main {
     padding: 15px;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr) ;
 }
 
-div.top,
-div.bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+div.weather {
+    grid-column: 3;
+    align-self: center;
 }
 
-div#weather {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-self: flex-start;
-    margin-top: -20px;
-}
-
-div#weather > img {
-    width: 70px;
-}
-
-p.weather-city {
-    width: 100%;
-    text-align: right;
-    margin: 0;
-    margin-top: -10px;
-    font-size: 1.2rem;
-}
-
-p.weather-temp {
-    margin: 0;
-    font-size: 1.7rem;
-    margin-left: -10px;
-}
-
-p#author {
-    font-size: 1rem;
-}
-
-div.center { 
-    width: 50vw;
-    margin: 0 auto;
+div.center {
+    grid-column: 2;
     text-align: center;
 }
 
-div#ai-news-con {
-    width: 30vw;
-    text-transform: capitalize;
+p#img-author,
+h3#todo-toggle {
+    grid-row: 3;
+    align-self: end;
 }
 
-div#ai-news-con a {
-    font-size: 1.2rem;
-    text-decoration: underline ;
-    font-family: inherit;
-    font-weight: 600;
-}
-div#ai-news-con p {
-    font-size: 0.9rem;
+h3#todo-toggle {
+    grid-column: 3;
+    justify-self: end;
+    cursor: pointer;
 }
 
-#todo-toggle { cursor: pointer;}
+div#weather {
+    justify-self: end;
+    align-self: start;
+}
+
+p.weather-city {
+    margin-top: -8px;
+    text-align: right;
+}
+
+div.temperature {
+    display: flex;
+    align-items: center;
+}
+div.temperature > img { width: 70px;}
 
 div.todo-list-con {
     display: none;
@@ -159,14 +165,7 @@ button.clear-todo-list {
     height: 15px;
     background: transparent;
     border: none;
-    font-family: inherit;
-
-    font-size: 0.8rem;
-    letter-spacing: 1.3px;   
     margin-bottom: 0.65em;
-    color:#535353;
-
-    text-decoration: underline;
 }
 
 .checkbox-wrapper-13 input[type=checkbox] {
@@ -182,8 +181,7 @@ button.clear-todo-list {
     height: 20px;
     width:18px;
     outline: none;
-    display: inline-block;
-    vertical-align: top;
+    border-radius: 5px;
     position: relative;
     margin: 0;
     cursor: pointer;
@@ -206,13 +204,6 @@ button.clear-todo-list {
   --d-t: .6s;
   --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
 }
-
-.checkbox-wrapper-13 input[type=checkbox]:hover:not(:checked):not(:disabled) {
-  --bc: var(--border-hover);
-}
-.checkbox-wrapper-13 input[type=checkbox]:focus {
-  box-shadow: 0 0 0 var(--focus);
-}
 .checkbox-wrapper-13 input[type=checkbox]:not(.switch) {
   width: 21px;
 }
@@ -228,10 +219,6 @@ button.clear-todo-list {
   cursor: pointer;
   margin-left: 4px;
 }
-  
-.checkbox-wrapper-13 input[type=checkbox]:not(.switch) {
-   border-radius: 5px;
-}
 .checkbox-wrapper-13 input[type=checkbox]:not(.switch):after {
     width: 5px;
     height: 9px;
@@ -245,7 +232,6 @@ button.clear-todo-list {
 .checkbox-wrapper-13 input[type=checkbox]:not(.switch):checked {
   --r: 43deg;
 }
-
 .checkbox-wrapper-13 * {
     box-sizing: inherit;
 }
@@ -253,4 +239,3 @@ button.clear-todo-list {
 .checkbox-wrapper-13 *:after {
    box-sizing: inherit;
 } 
-

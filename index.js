@@ -30,7 +30,7 @@ async function setBackgroundImage() {
     try {
         const res = await fetch(UNSPLASH_URL)
         const data = await res.json()
-        document.body.style.backgroundImage = `url(${data.urls.regular})`
+        document.body.style.backgroundImage = `url(${data.urls.full})`
         document.getElementById("img-author").innerHTML = `<a href="${data.user.portfolio_url}">Photo by <u>${data.user.name}</u> on <u>Unsplash</u></a>`
     } catch (error) {
         console.log(error)
@@ -46,7 +46,6 @@ async function getQuote() {
     try {
         const response = await fetch(QUOTES_URL, QUOTES_OPTIONS)
         const data = await response.json()
-        console.log(data)
         document.getElementById("quote").textContent = data.text
         document.getElementById("quote-author").textContent = data.author
     } catch (error) {
@@ -60,15 +59,18 @@ await getQuote()
 
 navigator.geolocation.getCurrentPosition(async position => {
     try {
-        const res = await fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
+        const res = await fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
         if (!res.ok) {
             throw error("Weather data not available")
         }
         const data = await res.json()
         const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+        console.log(iconUrl)
         document.getElementById("weather").innerHTML = `
-            <img src=${iconUrl} />
+        <div class="temperature">
+            <img src="${iconUrl}" />
             <p class="weather-temp">${Math.round(data.main.temp)}º</p>
+        </div>
             <p class="weather-city">${data.name}</p>
         `
     } catch (error) {
