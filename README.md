@@ -1,4 +1,9 @@
-# Getting Started
+#Personal Dashboard Extension
+
+A project created as a part of Scrimba Frontend Development Course.
+<p>Deployed website: https://olenag8.github.io/movie-watchlist/ </p>
+
+<h3>Quick start:</h3>
 Install the dependencies and run the project
 ```
 npm install
