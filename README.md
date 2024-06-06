@@ -5,6 +5,7 @@ A project created as a part of Scrimba Frontend Development Course.
 
 <h3>Quick start:</h3>
 Install the dependencies and run the project
+
 ```
 npm install
 npm start
